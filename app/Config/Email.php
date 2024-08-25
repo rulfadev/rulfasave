@@ -6,116 +6,142 @@ use CodeIgniter\Config\BaseConfig;
 
 class Email extends BaseConfig
 {
-    public string $fromEmail  = '';
-    public string $fromName   = '';
-    public string $recipients = '';
+    public $fromEmail = 'rulfadev@outlook.com';
+    public $fromName = 'Rulfa Dev';
+    public $recipients = '';
 
-    /**
-     * The "user agent"
-     */
-    public string $userAgent = 'CodeIgniter';
+    public $protocol = 'smtp';
+    public $SMTPHost = '';
+    public $SMTPUser = '';
+    public $SMTPPass = '';
+    public $SMTPPort = 587;
+    public $SMTPCrypto = 'tls';
 
-    /**
-     * The mail sending protocol: mail, sendmail, smtp
-     */
-    public string $protocol = 'mail';
+    public function __construct()
+    {
+        $this->SMTPHost = env('email.SMTPHost');
+        $this->SMTPUser = env('email.SMTPUser');
+        $this->SMTPPass = env('email.SMTPPass');
+        $this->SMTPPort = (int) env('email.SMTPPort');
+        $this->SMTPCrypto = env('email.SMTPCrypto');
+    }
+    public $mailType = 'html'; // atau 'text'
+    public $charset = 'utf-8';
+    public $wordWrap = true;
+    public $newline = "\r\n";
+    public $crlf = "\r\n";
+    public $SMTPTimeout = 60;
 
-    /**
-     * The server path to Sendmail.
-     */
-    public string $mailPath = '/usr/sbin/sendmail';
+    // public string $fromEmail  = '';
+    // public string $fromName   = '';
+    // public string $recipients = '';
 
-    /**
-     * SMTP Server Hostname
-     */
-    public string $SMTPHost = '';
+    // /**
+    //  * The "user agent"
+    //  */
+    // public string $userAgent = 'CodeIgniter';
 
-    /**
-     * SMTP Username
-     */
-    public string $SMTPUser = '';
+    // /**
+    //  * The mail sending protocol: mail, sendmail, smtp
+    //  */
+    // public string $protocol = 'mail';
 
-    /**
-     * SMTP Password
-     */
-    public string $SMTPPass = '';
+    // /**
+    //  * The server path to Sendmail.
+    //  */
+    // public string $mailPath = '/usr/sbin/sendmail';
 
-    /**
-     * SMTP Port
-     */
-    public int $SMTPPort = 25;
+    // /**
+    //  * SMTP Server Hostname
+    //  */
+    // public string $SMTPHost = '';
 
-    /**
-     * SMTP Timeout (in seconds)
-     */
-    public int $SMTPTimeout = 5;
+    // /**
+    //  * SMTP Username
+    //  */
+    // public string $SMTPUser = '';
 
-    /**
-     * Enable persistent SMTP connections
-     */
-    public bool $SMTPKeepAlive = false;
+    // /**
+    //  * SMTP Password
+    //  */
+    // public string $SMTPPass = '';
 
-    /**
-     * SMTP Encryption.
-     *
-     * @var string '', 'tls' or 'ssl'. 'tls' will issue a STARTTLS command
-     *             to the server. 'ssl' means implicit SSL. Connection on port
-     *             465 should set this to ''.
-     */
-    public string $SMTPCrypto = 'tls';
+    // /**
+    //  * SMTP Port
+    //  */
+    // public int $SMTPPort = 25;
 
-    /**
-     * Enable word-wrap
-     */
-    public bool $wordWrap = true;
+    // /**
+    //  * SMTP Timeout (in seconds)
+    //  */
+    // public int $SMTPTimeout = 5;
 
-    /**
-     * Character count to wrap at
-     */
-    public int $wrapChars = 76;
+    // /**
+    //  * Enable persistent SMTP connections
+    //  */
+    // public bool $SMTPKeepAlive = false;
 
-    /**
-     * Type of mail, either 'text' or 'html'
-     */
-    public string $mailType = 'text';
+    // /**
+    //  * SMTP Encryption.
+    //  *
+    //  * @var string '', 'tls' or 'ssl'. 'tls' will issue a STARTTLS command
+    //  *             to the server. 'ssl' means implicit SSL. Connection on port
+    //  *             465 should set this to ''.
+    //  */
+    // public string $SMTPCrypto = 'tls';
 
-    /**
-     * Character set (utf-8, iso-8859-1, etc.)
-     */
-    public string $charset = 'UTF-8';
+    // /**
+    //  * Enable word-wrap
+    //  */
+    // public bool $wordWrap = true;
 
-    /**
-     * Whether to validate the email address
-     */
-    public bool $validate = false;
+    // /**
+    //  * Character count to wrap at
+    //  */
+    // public int $wrapChars = 76;
 
-    /**
-     * Email Priority. 1 = highest. 5 = lowest. 3 = normal
-     */
-    public int $priority = 3;
+    // /**
+    //  * Type of mail, either 'text' or 'html'
+    //  */
+    // public string $mailType = 'text';
 
-    /**
-     * Newline character. (Use “\r\n” to comply with RFC 822)
-     */
-    public string $CRLF = "\r\n";
+    // /**
+    //  * Character set (utf-8, iso-8859-1, etc.)
+    //  */
+    // public string $charset = 'UTF-8';
 
-    /**
-     * Newline character. (Use “\r\n” to comply with RFC 822)
-     */
-    public string $newline = "\r\n";
+    // /**
+    //  * Whether to validate the email address
+    //  */
+    // public bool $validate = false;
 
-    /**
-     * Enable BCC Batch Mode.
-     */
-    public bool $BCCBatchMode = false;
+    // /**
+    //  * Email Priority. 1 = highest. 5 = lowest. 3 = normal
+    //  */
+    // public int $priority = 3;
 
-    /**
-     * Number of emails in each BCC batch
-     */
-    public int $BCCBatchSize = 200;
+    // /**
+    //  * Newline character. (Use “\r\n” to comply with RFC 822)
+    //  */
+    // public string $CRLF = "\r\n";
 
-    /**
-     * Enable notify message from server
-     */
-    public bool $DSN = false;
+    // /**
+    //  * Newline character. (Use “\r\n” to comply with RFC 822)
+    //  */
+    // public string $newline = "\r\n";
+
+    // /**
+    //  * Enable BCC Batch Mode.
+    //  */
+    // public bool $BCCBatchMode = false;
+
+    // /**
+    //  * Number of emails in each BCC batch
+    //  */
+    // public int $BCCBatchSize = 200;
+
+    // /**
+    //  * Enable notify message from server
+    //  */
+    // public bool $DSN = false;
 }
